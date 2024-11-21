@@ -22,8 +22,9 @@
 
 <script>
 import ContentBase from '@/components/ContentBase.vue';
+import store from '@/store';
 import { ref } from 'vue';
-
+//import { useStore } from 'vuex';
 export default {
     name: 'LoginView',
     components: {
@@ -35,7 +36,16 @@ export default {
         let error_message = ref('');
 
         const login = () => {
-            console.log(username.value, password.value);
+            store.dispatch("login", {
+                username: username.value,
+                password: password.value,
+                succsee() {
+                    console.log("success");
+                },
+                error() {
+                    console.log("error");
+                }
+            })
         }
         return {
             username,
